@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Colors
 COLOR_YELLOW='\033[1;33m'
 COLOR_LYELLOW='\033[1;93m'
@@ -12,6 +11,7 @@ COLOR_BLUE='\033[0;34m'
 COLOR_LBLUE='\033[0;94m'
 COLOR_NC='\033[0m'
 
+# Functions
 run_script() {
 	bash <(curl -s "$GITHUB_URL/scripts/$1.sh")
 }
@@ -20,6 +20,7 @@ inject_txt() {
 	sudo curl -sSL -o "$1" "$GITHUB_URL/$2"
 }
 
+# echo functions
 output() {
   echo -e "* $1"
 }
@@ -48,7 +49,17 @@ warning() {
   echo ""
 }
 
+# Check if the script was run on AlmaLinux 9 before continuing
+checkforalma9() {
+	if ! [[ $(cat /etc/os-release | grep -c "almalinux:9:") -eq 1 ]]; then
+		warning "This script was only tested on AlmaLinux 9. Proceed with caution."
+		sleep 5
+	fi
+}
+
+# Fancy welcome message :)
 welcome() {
+	checkforalma9 ""
 	clear
 	output "Welcome to...${COLOR_LBLUE}"
 	echo ""
@@ -64,6 +75,7 @@ welcome() {
 	sleep 2
 }
 
+# Ask if the installer wants to perform a full system upgrade before continuing
 performupgrades() {
 	read -r -p "Do a full system upgrade? (y/N) " CONFIRM
 	echo $CONFIRM
@@ -76,6 +88,7 @@ performupgrades() {
 	fi
 }
 
+# Ask for confirmation if the installer wants to restart
 scriptdone() {
 	rm -rf /tmp/lib.sh
 	echo "Hopper should be ready to go!"
@@ -84,10 +97,11 @@ scriptdone() {
 	if [[ "$CONFIRM" =~ [Yy] ]]; then
 		sudo reboot
 	else
-		output "Skipping system upgrade."
+		output "Ok, have a nice day!"
 	fi
 }
 
+# Helper function
 lib_loaded() {
   return 0
 }

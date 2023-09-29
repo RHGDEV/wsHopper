@@ -6,29 +6,22 @@ rm -rf /tmp/lib.sh
 curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/scripts/lib.sh
 source /tmp/lib.sh
 
-welcome ""
-performupgrades ""
+welcome "" # Checks for AlmaLinux 9 and displays welcome message
+performupgrades "" # Upgrade prompter
 
-# Install banners
-run_script banners # DONE
 
-# Install openssh
-run_script openssh # DONE
+run_script banners # Install banners
 
-# Install fail2ban
-run_script fail2ban # DONE
+run_script openssh # Install openssh
 
-# Install Apache
-run_script apache # DONE
+run_script fail2ban # Install fail2ban
 
-# Install MariaDB
-#run_script mariadb # TBD
+run_script apache # Install Apache
 
-# Install ASP.NET
-#run_script aspnet # TBD
+#run_script mariadb # Install MariaDB
 
-# Install SQL Server
-#run_script sql-server # TBD
+#run_script aspnet # Install ASP.NET
 
-# Done with installs
-scriptdone ""
+#run_script sql-server # Install MariaDB
+
+scriptdone "" # Script is done!

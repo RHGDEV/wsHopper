@@ -13,4 +13,4 @@
 bash <(curl -s "https://raw.githubusercontent.com/RHGDEV/wsHopper/master/init.sh")
 ```
 
-Installation Script for a linux server called Hopper
+Installation scripts for a linux server.
