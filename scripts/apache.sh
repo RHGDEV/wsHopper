@@ -9,26 +9,29 @@ info "Starting Apache Install.."
 
 
 sudo dnf install -y -q httpd # Install Httpd
-sudo systemctl enable httpd # Enable Httpd
-sudo systemctl start httpd # Start Httpd
+sudo systemctl enable --now httpd # Enable and Start Httpd
 
 sudo firewall-cmd --add-service=http --permanent # Add http to firewall
 sudo firewall-cmd --reload # Reload firewall
 
-# Configure Httpd to public html
-sudo sed -i 's%UserDir disabled%%' /etc/httpd/conf.d/userdir.conf
-sudo sed -i 's%#UserDir public_html%UserDir public_html%' /etc/httpd/conf.d/userdir.conf
+if askbool "Configure apache's UserDir (public_html)"; then
+	# Configure Httpd to public html
+	sudo sed -i 's%UserDir disabled%%' /etc/httpd/conf.d/userdir.conf
+	sudo sed -i 's%#UserDir public_html%UserDir public_html%' /etc/httpd/conf.d/userdir.conf
 
-# Restart Httpd
-sudo systemctl restart httpd
+	# Restart Httpd
+	sudo systemctl restart httpd
 
-sudo setsebool -P httpd_enable_homedirs true # Allow selinux to allow httpd to read home directories
+	# Allow selinux to allow httpd to read home directories
+	sudo setsebool -P httpd_enable_homedirs true 
 
-mkdir -p ~/public_html # Make public_html for current user
-chmod 711 ~ # Set permissions for public_html
+	# Create public_html directory and set permission for current user
+	mkdir -p ~/public_html
+	chmod 711 ~
 
-sudo mkdir -p /etc/skel/public_html # Make public_html for new users
-sudo chmod 711 /etc/skel # Set permissions
-
+	# Create public_html directory and set permission for new users
+	sudo mkdir -p /etc/skel/public_html
+	sudo chmod 711 /etc/skel
+fi
 
 success "Apache Installed!"

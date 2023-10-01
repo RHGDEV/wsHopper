@@ -49,6 +49,29 @@ warning() {
   echo ""
 }
 
+# Function to ask a question and return a value
+askbool() {
+  read -r -p "$1 (y/N) " VAL
+  return $VAL =~ [Yy]
+}
+
+ask() {
+  read -r -p "$1 " VAL
+  return $VAL
+}
+
+performupgrades() {
+	read -r -p "Do a full system upgrade? (y/N) " CONFIRM
+	echo $CONFIRM
+	if [[ "$CONFIRM" =~ [Yy] ]]; then
+		sudo dnf upgrade -y
+		output "System upgrade complete. Awaiting for any keypress to continue..."
+		read
+	else
+		output "Skipping system upgrade."
+	fi
+}
+
 # Check if the script was run on AlmaLinux 9 before continuing
 checkforalma9() {
 	if ! [[ $(cat /etc/os-release | grep -c "almalinux:9:") -eq 1 ]]; then

@@ -9,6 +9,6 @@ info "Starting ASP.Net Install.."
 
 
 # NOTES: Install ASP.Net for RHEL 9
-
+dnf -y install dotnet-runtime-6.0 dotnet-sdk-6.0 dotnet-targeting-pack-6.0 dotnet-templates-6.0 dotnet-hostfxr-6.0
 
 success "ASP.Net Installed!"

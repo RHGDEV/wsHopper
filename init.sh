@@ -9,19 +9,18 @@ source /tmp/lib.sh
 welcome "" # Checks for AlmaLinux 9 and displays welcome message
 performupgrades "" # Upgrade prompter
 
+if askbool "Install prefab banners?"; then run_script banners; fi # Install banners
 
-run_script banners # Install banners
+if askbool "Configure OpenSSH?"; then run_script openssh; fi  # Install openssh
 
-run_script openssh # Install openssh
+if askbool "Install and Setup Fail2ban?"; then run_script fail2ban; fi  # Install fail2ban
 
-run_script fail2ban # Install fail2ban
+if askbool "Install and Setup Apache?"; then run_script apache; fi  # Install Apache
 
-run_script apache # Install Apache
+if askbool "Install and Setup MariaDB?"; then run_script mariadb; fi  # Install MariaDB
 
-#run_script mariadb # Install MariaDB
+if askbool "Install and Setup ASP.NET?"; then run_script aspnet; fi  # Install ASP.NET
 
-#run_script aspnet # Install ASP.NET
-
-#run_script sql-server # Install MariaDB
+if askbool "Install and Setup SQL Server?"; then run_script sql-server; fi  # Install SQL Server
 
 scriptdone "" # Script is done!

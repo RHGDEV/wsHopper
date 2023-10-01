@@ -8,7 +8,18 @@ fi
 info "Starting MariaDB Install.."
 
 
-# NOTES: Install MariaDB 10.6 for RHEL 9
+sudo dnf install -y mariadb-server mariadb # Install MariaDB
+
+sudo systemctl enable --start mariadb # Enable and Start MariaDB
+
+sudo firewall-cmd --add-service=mysql --permanent # Add mysql to firewall
+sudo firewall-cmd --reload # Reload firewall
+
+if askbool "Secure MariaDB now? (runs mysql_secure_installation)"; then
+	sudo mysql_secure_installation
+fi
+sudo mysql -u root -p
+
 
 
 success "MariaDB Installed!"
