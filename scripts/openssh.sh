@@ -15,7 +15,7 @@ sudo sed -i 's%#PermitRootLogin prohibit-password%PermitRootLogin no%' /etc/ssh/
 sudo sed -i 's%#Banner none%Banner /etc/issue.net%' /etc/ssh/sshd_config
 
 # Setup Banners
-inject_txt /etc/issue.net /banners/issue.net.txt
+# inject_txt /etc/issue.net /banners/issue.net.txt
 
 # Restart SSH
 sudo systemctl restart sshd

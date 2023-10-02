@@ -10,7 +10,7 @@ info "Starting Banner Install.."
 
 # Setup Banners
 inject_txt /etc/issue /banners/issue.txt # Displayed before login on TTY
-inject_txt /etc/issue /banners/issue.net.txt # Displayed before login on TTY
+inject_txt /etc/issue.net /banners/issue.net.txt # Displayed before login on TTY
 #inject_txt /etc/motd /banners/motd.txt # Displayed after login either on TTY or SSH
 
 
