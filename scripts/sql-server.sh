@@ -28,9 +28,7 @@ if askbool "Configure SQL Server now?"; then
 fi
 
 if askbool "Install SQL Server tools?"; then
-	sudo su # Switch to root
 	sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/9/prod.repo # Add repo for SQL Server tools
-	exit # Exit root
 	sudo dnf install -y mssql-tools unixODBC-devel # Install SQL Server tools
 	echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile # Add SQL Server tools to path
 fi
