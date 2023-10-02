@@ -8,9 +8,10 @@ fi
 info "Starting MariaDB Install.."
 
 
-sudo dnf install -y mariadb-server mariadb # Install MariaDB
+sudo dnf install -y -q  mariadb-server mariadb # Install MariaDB
 
-sudo systemctl enable --start mariadb # Enable and Start MariaDB
+sudo systemctl enable mariadb # Enable MariaDB
+sudo systemctl start mariadb # Start MariaDB
 
 sudo firewall-cmd --add-service=mysql --permanent # Add mysql to firewall
 sudo firewall-cmd --reload # Reload firewall

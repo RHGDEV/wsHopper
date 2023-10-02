@@ -26,15 +26,11 @@ output() {
 }
 
 info() {
-  echo ""
   output "${COLOR_YELLOW}$1${COLOR_NC}"
-  echo ""
 }
 
 success() {
-  echo ""
   output "${COLOR_GREEN}SUCCESS${COLOR_LGREEN}: $1${COLOR_NC}"
-  echo ""
 }
 
 error() {
@@ -51,7 +47,7 @@ warning() {
 
 # Function to ask a question and return a value
 askbool() {
-	read -r -p "* $1 (Y/n) " VAL
+	read -r -p "$1 (Y/n) " VAL
 	if [[ "$VAL" =~ [Nn] ]]; then
 		return 1
 	else
@@ -60,20 +56,8 @@ askbool() {
 }
 
 ask() {
-  read -r -p "* $1 " VAL
+  read -r -p "$1 " VAL
   return $VAL
-}
-
-performupgrades() {
-	read -r -p "Do a full system upgrade? (y/N) " CONFIRM
-	echo $CONFIRM
-	if [[ "$CONFIRM" =~ [Yy] ]]; then
-		sudo dnf upgrade -y
-		output "System upgrade complete. Awaiting for any keypress to continue..."
-		read
-	else
-		output "Skipping system upgrade."
-	fi
 }
 
 # Check if the script was run on AlmaLinux 9 before continuing
@@ -108,13 +92,7 @@ performupgrades() {
 		sudo dnf upgrade -y
 		output "System upgrade complete. Awaiting for any keypress to continue..."
 		read
-		read -r -p "Restart now? (y/N) " CONFIRM
-		echo $CONFIRM
-		if [[ "$CONFIRM" =~ [Yy] ]]; then
-			sudo reboot
-		else
-			output "Ok, have a nice day!"
-		fi
+		askrestart ""
 	else
 		output "Skipping system upgrade."
 	fi
@@ -124,12 +102,15 @@ performupgrades() {
 scriptdone() {
 	rm -rf /tmp/lib.sh
 	echo "Hopper should be ready to go!"
-	read -r -p "Restart now? (y/N) " CONFIRM
+	askrestart ""
+}
+
+# Ask for confirmation if the installer wants to restart
+askrestart() {
+	read -r -p "Restart now? (Y/n) " CONFIRM
 	echo $CONFIRM
-	if [[ "$CONFIRM" =~ [Yy] ]]; then
+	if [[ "$CONFIRM" =~ [Nn] ]]; then
 		sudo reboot
-	else
-		output "Ok, have a nice day!"
 	fi
 }
 
