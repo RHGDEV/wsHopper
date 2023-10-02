@@ -51,12 +51,16 @@ warning() {
 
 # Function to ask a question and return a value
 askbool() {
-  read -r -p "$1 (y/N) " VAL
-  return $VAL =~ [Yy]
+	read -r -p "* $1 (Y/n) " VAL
+	if [[ "$VAL" =~ [Nn] ]]; then
+		return 1
+	else
+		return 0
+	fi
 }
 
 ask() {
-  read -r -p "$1 " VAL
+  read -r -p "* $1 " VAL
   return $VAL
 }
 
@@ -82,8 +86,6 @@ checkforalma9() {
 
 # Fancy welcome message :)
 welcome() {
-	checkforalma9 ""
-	clear
 	output "Welcome to...${COLOR_LBLUE}"
 	echo ""
 	output "      :::    :::  ::::::::  :::::::::  :::::::::  :::::::::: :::::::::"
@@ -106,6 +108,13 @@ performupgrades() {
 		sudo dnf upgrade -y
 		output "System upgrade complete. Awaiting for any keypress to continue..."
 		read
+		read -r -p "Restart now? (y/N) " CONFIRM
+		echo $CONFIRM
+		if [[ "$CONFIRM" =~ [Yy] ]]; then
+			sudo reboot
+		else
+			output "Ok, have a nice day!"
+		fi
 	else
 		output "Skipping system upgrade."
 	fi
