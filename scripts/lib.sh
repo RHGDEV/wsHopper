@@ -60,6 +60,22 @@ ask() {
   return $VAL
 }
 
+# Ask for confirmation if the installer wants to restart
+askrestart() {
+	read -r -p "Restart now? (Y/n) " CONFIRM
+	echo $CONFIRM
+	if [[ "$CONFIRM" =~ [Nn] ]]; then
+		sudo reboot
+	fi
+}
+
+detectssh() {
+	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+		warning "SSH detected. This script should be ran locally to prevent disconnection during install."
+		sleep 5
+	fi
+}
+
 # Check if the script was run on AlmaLinux 9 before continuing
 checkforalma9() {
 	if ! [[ $(cat /etc/os-release | grep -c "almalinux:9:") -eq 1 ]]; then
@@ -103,15 +119,6 @@ scriptdone() {
 	rm -rf /tmp/lib.sh
 	echo "Hopper should be ready to go!"
 	askrestart ""
-}
-
-# Ask for confirmation if the installer wants to restart
-askrestart() {
-	read -r -p "Restart now? (Y/n) " CONFIRM
-	echo $CONFIRM
-	if [[ "$CONFIRM" =~ [Nn] ]]; then
-		sudo reboot
-	fi
 }
 
 # Helper function

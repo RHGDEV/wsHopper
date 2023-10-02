@@ -6,6 +6,7 @@ rm -rf /tmp/lib.sh
 curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/scripts/lib.sh
 source /tmp/lib.sh
 
+detectssh "" # Detects if SSH is running and displays warning message
 checkforalma9 "" # Checks for AlmaLinux 9 and displays warning message
 welcome "" # Checks for AlmaLinux 9 and displays welcome message
 performupgrades "" # Upgrade prompter
