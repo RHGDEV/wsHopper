@@ -12,15 +12,10 @@ info "Starting MSSQL-Server Install.."
 # Install SQL Server tools aswell
 
 # NOTE: This is a preview version of SQL Server, not for production use.
-# warning "For future use when SQL Server is released for RHEL 9. Not tested yet, just a placeholder. Say no for now."
-# if askbool "Is SQL Server released for RHEL 9 yet?"; then
-# 	sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server.repo # Add repo for SQL Server RHEL 9 prod.
-# 	sudo dnf install -y -q mssql-server # Install SQL Server
-# else
+
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo # Add repo for SQL Server RHEL 9 preview
 sudo dnf install -y -q mssql-server-selinux # Install SQL Server selinux
-sudo dnf install -y -q mssql-server # Install SQL Server
-# fi
+#sudo dnf install -y -q mssql-server # Install SQL Server
 
 if askbool "Configure SQL Server now?"; then
 	sudo /opt/mssql/bin/mssql-conf setup # Configure SQL Server
