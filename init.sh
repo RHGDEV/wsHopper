@@ -3,7 +3,7 @@ export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper/master"
 
 # Remove and download new files from github
 rm -rf /tmp/lib.sh
-curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/scripts/lib.sh
+curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/lib/lib.sh
 source /tmp/lib.sh
 
 detectssh "" # Detects if SSH is running and displays warning message
