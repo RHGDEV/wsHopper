@@ -12,15 +12,11 @@ info "Starting MSSQL-Server Install.."
 # Install SQL Server tools aswell
 
 # NOTE: This is a preview version of SQL Server, not for production use.
-
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo # Add repo for SQL Server RHEL 9 preview
-sudo dnf install -y -q mssql-server-selinux # Install SQL Server selinux
-#sudo dnf install -y -q mssql-server # Install SQL Server
+sudo dnf install -y mssql-server-selinux # Install SQL Server selinux
 
 if askbool "Configure SQL Server now?"; then
 	sudo /opt/mssql/bin/mssql-conf setup # Configure SQL Server
-	sudo firewall-cmd --add-service=mssql --permanent # Add mssql:1433tcp to firewall
-	sudo firewall-cmd --reload # Reload firewall
 fi
 
 if askbool "Install SQL Server tools?"; then
@@ -29,5 +25,17 @@ if askbool "Install SQL Server tools?"; then
 	echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile # Add SQL Server tools to path
 fi
 
+sudo firewall-cmd --add-service=mssql --permanent # Add mssql:1433tcp to firewall
+sudo firewall-cmd --reload # Reload firewall
+
 
 success "MSSQL-Server Installed!"
+
+
+# Successful install
+# sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo # Add repo for SQL Server RHEL 9 preview
+# sudo yum install -y mssql-server                           
+# sudo /opt/mssql/bin/mssql-conf setup   
+# sestatus
+# sudo yum install -y mssql-server-selinux
+# sudo /opt/mssql/bin/mssql-conf setup
