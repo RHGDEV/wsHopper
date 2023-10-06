@@ -17,7 +17,7 @@ sudo firewall-cmd --add-service=mysql --permanent # Add mysql to firewall
 sudo firewall-cmd --reload # Reload firewall
 
 if askbool "Secure MariaDB now? (runs mysql_secure_installation)"; then
-	sudo mysql_secure_installation
+	sudo mysql_secure_installation # Secure MariaDB
 fi
 # sudo mysql -u root -p
 
