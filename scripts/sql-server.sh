@@ -20,35 +20,32 @@ info "Starting MSSQL-Server Install.."
 # NOTE: This is a preview version of SQL Server, not for production use.
 
 if ! [[ $(cat /etc/selinux/config | grep -c "SELINUX=enforcing") -eq 1 ]]; then
-	warning "SQL Server requires SELinux to be enforcing. Please enable SELinux in enforcing and reboot before continuing."
+	warning "This SQL Server preview requires SELinux to be enforcing. Please enable SELinux in enforcing and reboot before continuing."
 	sleep 5
 fi
 
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo # Add repo for SQL Server RHEL 9 preview
 sudo yum install -y mssql-server # Install SQL Server
-sudo yum install -y mssql-server-selinux # Install SQL Server selinux
+sudo yum install -y mssql-server-selinux # Install SQL Server selinux policy package
 
 if askbool "Configure SQL Server now?"; then
 	sudo /opt/mssql/bin/mssql-conf setup # Configure SQL Server
 fi
 
 if askbool "Install SQL Server tools?"; then
-	sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo # Add repo for SQL Server tools
+	sudo curl -o /etc/yum.repos.d/mssql-release.repo https://packages.microsoft.com/config/rhel/8/prod.repo # Add repo for SQL Server tools
 	sudo dnf install -y mssql-tools unixODBC-devel # Install SQL Server tools
 	echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bash_profile # Add SQL Server tools to path
+
+	# NOTE: To access the server use 'sqlcmd -No -S localhost -U sa -P <password>'
+	# -No = Disable secure connection (SSL) because we don't have a certificate
+	# -S = Server address
+	# -U = Username
+	# -P = Password
 fi
 
-sudo firewall-cmd --add-service=mssql --permanent # Add mssql:1433tcp to firewall
-sudo firewall-cmd --reload # Reload firewall
+sudo firewall-cmd --add-service=mssql --permanent # Add mssql:1433 tcp to firewall (permanent)
+sudo firewall-cmd --reload # Reload firewall rules
 
 
 success "MSSQL-Server Installed!"
-
-
-# Successful install
-# sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo
-# sudo yum install -y mssql-server                           
-# sudo /opt/mssql/bin/mssql-conf setup   
-# sestatus
-# sudo yum install -y mssql-server-selinux
-# sudo /opt/mssql/bin/mssql-conf setup
