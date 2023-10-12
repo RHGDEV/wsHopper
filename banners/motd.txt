@@ -1,1 +1,1 @@
-TODO: write logon banner
+TODO: get motd banner from current server
