@@ -8,18 +8,19 @@ fi
 info "Starting Apache Install.."
 
 
-sudo dnf install -y -q httpd # Install Httpd
-sudo systemctl enable --now httpd # Enable and Start Httpd
+sudo dnf install -y -q httpd # Install Httpd (Apache)
+sudo systemctl enable httpd # Enable Httpd service
+sudo systemctl start httpd # Start Httpd service
 
-sudo firewall-cmd --add-service=http --permanent # Add http to firewall
-sudo firewall-cmd --reload # Reload firewall
+sudo firewall-cmd --add-service=http --permanent # Add http to firewall (permanent)
+sudo firewall-cmd --reload # Reload firewall rules
 
 if askbool "Configure apache's UserDir (public_html)"; then
-	# Configure Httpd to public html
+	# Configure Httpd public html directories
 	sudo sed -i 's%UserDir disabled%%' /etc/httpd/conf.d/userdir.conf
 	sudo sed -i 's%#UserDir public_html%UserDir public_html%' /etc/httpd/conf.d/userdir.conf
 
-	# Restart Httpd
+	# Restart Httpd service
 	sudo systemctl restart httpd
 
 	# Allow selinux to allow httpd to read home directories

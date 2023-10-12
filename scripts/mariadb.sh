@@ -8,16 +8,16 @@ fi
 info "Starting MariaDB Install.."
 
 
-sudo dnf install -y -q  mariadb-server mariadb # Install MariaDB
+sudo dnf install -y -q  mariadb-server mariadb # Install MariaDB server and client
 
-sudo systemctl enable mariadb # Enable MariaDB
-sudo systemctl start mariadb # Start MariaDB
+sudo systemctl enable mariadb # Enable MariaDB on boot
+sudo systemctl start mariadb # Start MariaDB service
 
-sudo firewall-cmd --add-service=mysql --permanent # Add mysql to firewall
-sudo firewall-cmd --reload # Reload firewall
+sudo firewall-cmd --add-service=mysql --permanent # Add mysql to firewall (permanent)
+sudo firewall-cmd --reload # Reload firewall rules
 
 if askbool "Secure MariaDB now? (runs mysql_secure_installation)"; then
-	sudo mysql_secure_installation # Secure MariaDB
+	sudo mysql_secure_installation # Secure MariaDB installation
 fi
 # sudo mysql -u root -p
 

@@ -8,18 +8,16 @@ fi
 info "Starting Fail2ban Install.."
 
 
-# Install Fail2ban
-sudo dnf install -y -q epel-release 
-sudo dnf install -y -q fail2ban fail2ban-firewalld
+sudo dnf install -y -q epel-release # Add EPEL repo for Fail2ban
+sudo dnf install -y -q fail2ban fail2ban-firewalld # Install Fail2ban and firewalld support for Fail2ban
 
-# Enable and Start Fail2ban
-sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
+sudo systemctl enable fail2ban # Enable Fail2ban on boot
+sudo systemctl start fail2ban # Start Fail2ban service
 
-# Setup firewalld
+# Setup firewalld for Fail2ban
 sudo mv /etc/fail2ban/jail.d/00-firewalld.conf /etc/fail2ban/jail.d/00-firewalld.local
 
-# Setup sshd jail
+# Setup sshd jail for Fail2ban
 sudo tee -a /etc/fail2ban/jail.local > /dev/null <<EOT
 [sshd]
 enabled = true
@@ -28,8 +26,7 @@ maxretry = 3
 findtime = 5m
 EOT
 
-# Restart Fail2ban
-sudo systemctl restart fail2ban
+sudo systemctl restart fail2ban # Restart Fail2ban service to apply changes
 
 
 success "Fail2ban Installed!"
