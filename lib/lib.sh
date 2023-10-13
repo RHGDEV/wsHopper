@@ -45,7 +45,7 @@ warning() {
   echo ""
 }
 
-# Function to ask a question and return a value
+# Function to ask a question and return a T/Fvalue
 askbool() {
 	read -r -p "$1 (Y/n) " VAL
 	if [[ "$VAL" =~ [Nn] ]]; then
@@ -60,18 +60,10 @@ ask() {
   return $VAL
 }
 
-# Ask for confirmation if the installer wants to restart
-askrestart() {
-	read -r -p "Restart now? (Y/n) " CONFIRM
-	echo $CONFIRM
-	if [[ "$CONFIRM" =~ [Nn] ]]; then
-		sudo reboot
-	fi
-}
-
+# Check if the script was run via SSH and display a warning message
 detectssh() {
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		warning "SSH detected. This script should be ran locally to prevent disconnection during install."
+		warning "SSH detected. This script should be ran locally to prevent any connection issues during installation."
 		sleep 5
 	fi
 }
@@ -86,6 +78,7 @@ checkforalma9() {
 
 # Fancy welcome message :)
 welcome() {
+	clear
 	output "Welcome to...${COLOR_LBLUE}"
 	echo ""
 	output "      :::    :::  ::::::::  :::::::::  :::::::::  :::::::::: :::::::::"
@@ -102,13 +95,11 @@ welcome() {
 
 # Ask if the installer wants to perform a full system upgrade before continuing
 performupgrades() {
-	read -r -p "Do a full system upgrade? (y/N) " CONFIRM
-	echo $CONFIRM
-	if [[ "$CONFIRM" =~ [Yy] ]]; then
+	if [[ askbool "Perform a full upgrade now?" ]]; then
+		info 'Performing a full system upgrade. This may take a while...'
 		sudo dnf upgrade -y
-		output "System upgrade complete. Awaiting for any keypress to continue..."
+		success "System upgrade complete. Awaiting for any keypress to continue..."
 		read
-		askrestart ""
 	else
 		output "Skipping system upgrade."
 	fi
@@ -116,9 +107,12 @@ performupgrades() {
 
 # Ask for confirmation if the installer wants to restart
 scriptdone() {
-	rm -rf /tmp/lib.sh
-	echo "Hopper should be ready to go!"
-	askrestart ""
+	rm -rf /tmp/lib.sh # Remove the lib.sh file from /tmp
+	clear # Clear the screen before displaying the script's output
+	success "Hopper should be ready to go!" # Display the script is done message
+	if [[ askbool "Restart now?" ]]; then # Ask if the installer wants to restart
+		sudo reboot
+	fi
 }
 
 # Helper function
