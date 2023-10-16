@@ -110,7 +110,7 @@ scriptdone() {
 	rm -rf /tmp/lib.sh # Remove the lib.sh file from /tmp
 	clear # Clear the screen before displaying the script's output
 	success "Hopper should be ready to go!" # Display the script is done message
-	if [[ askbool "Restart now?" ]]; then # Ask if the installer wants to restart
+	if askbool "Restart now?"; then # Ask if the installer wants to restart
 		sudo reboot
 	fi
 }
