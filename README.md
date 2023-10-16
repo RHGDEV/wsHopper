@@ -8,7 +8,7 @@
 ###    ###  ########  ###        ###        ########## ###    ### 
 ```
 
-Install command with short url
+## Install Command
 ```bash
 bash <(curl -s "https://hopper.devrh.gq")
 ```
@@ -20,10 +20,10 @@ bash <(curl -s "https://raw.githubusercontent.com/RHGDEV/wsHopper/master/init.sh
 
 Installation scripts for a linux server.
 
-Folder Structure
+## Structure
 
-`./banners` - Folder of banners for legal
+[maint](https://github.com/rhgdev/wshopper/tree/maint) - Branch of maintenance scripts
 
-`./lib` - Library of functions for install scripts
+[lib](https://github.com/rhgdev/wshopper/tree/lib) - Branch of functions and static files for scripts
 
-`./scripts` - Install Scripts
+[./scripts](https://github.com/RHGDEV/wsHopper/tree/master/scripts) - Install Scripts
