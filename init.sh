@@ -1,5 +1,5 @@
 #!/bin/bash
-export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper/master"
+export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper"
 
 # Remove and download new files from github
 rm -rf /tmp/lib.sh
