@@ -24,6 +24,8 @@ if ! [[ $(cat /etc/selinux/config | grep -c "SELINUX=enforcing") -eq 1 ]]; then
 	sleep 5
 fi
 
+warning "This is very buggy and may not work. You should just install it manually."
+
 sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo # Add repo for SQL Server RHEL 9 preview
 sudo yum install -y mssql-server # Install SQL Server
 sudo yum install -y mssql-server-selinux # Install SQL Server selinux policy package
