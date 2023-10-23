@@ -28,11 +28,7 @@ if askbool "Configure apache's UserDir (public_html)"; then
 
 	# Create public_html directory and set permission for current user
 	mkdir -p ~/public_html
-	chmod 711 ~
-
-	# Create public_html directory and set permission for new users
-	sudo mkdir -p /etc/skel/public_html
-	sudo chmod 711 /etc/skel
+	chmod 755 ~
 fi
 
 success "Apache Installed!"
