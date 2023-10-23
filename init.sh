@@ -10,7 +10,7 @@ clear # Clear the screen before displaying the script's output
 detectssh "" # Detects if SSH is running and displays warning message
 checkforalma9 "" # Checks for AlmaLinux 9 and displays warning message
 welcome "" # Checks for AlmaLinux 9 and displays welcome message
-#askformaint "" # For future use maintenance menu (not implemented yet)
+askformaint "" # For future use maintenance menu (not implemented yet)
 performupgrades "" # Upgrade prompter
 
 if askbool "Install prefab banners?"; then run_script banners; fi # Install banners
