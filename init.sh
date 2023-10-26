@@ -24,10 +24,10 @@ while true; do
     select item in "${items[@]}" Quit
     do
         case $REPLY in
-            1) bash <(curl -s "$GITHUB_URL/install/init.sh"); break;;
+            1) bash <(curl -s "$GITHUB_URL/install/init.sh"); break 0;;
             2) bash <(curl -s "$GITHUB_URL/maint/init.sh"); break;;
             $((${#items[@]}+1))) break 0;;
-            *) echo "Ooops - unknown choice $REPLY"; break;
+            *) break;
         esac
     done
 done

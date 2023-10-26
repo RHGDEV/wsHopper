@@ -30,7 +30,7 @@ while true; do
             4) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             5) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             $((${#items[@]}+1))) break 0;;
-            *) echo "Ooops - unknown choice $REPLY"; break;
+            *) break;
         esac
     done
 done
