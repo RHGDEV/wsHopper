@@ -9,7 +9,6 @@ source /tmp/lib.sh
 clear # Clear the screen before displaying the script's output
 detectssh "" # Detects if SSH is running and displays warning message
 checkforalma9 "" # Checks for AlmaLinux 9 and displays warning message
-performupgrades "" # Upgrade prompter
 
 items=(
 	"Install Process"

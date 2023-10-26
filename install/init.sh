@@ -6,11 +6,7 @@ if ! fn_exists lib_loaded; then
   ! fn_exists lib_loaded && echo "* ERROR: Could not load lib script" && exit 1
 fi
 
-# Remove and download new files from github
-rm -rf /tmp/lib.sh
-curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/lib/lib.sh
-source /tmp/lib.sh
-
+performupgrades "" # Upgrade prompter
 clear # Clear the screen before displaying the script's output
 
 if askbool "Install prefab banners?"; then run_script install banners; fi # Install banners
