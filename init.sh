@@ -20,11 +20,12 @@ while true; do
 	printbanner ""
 	echo ""
 	echo ""
+	echo ""
     select item in "${items[@]}" Quit
     do
         case $REPLY in
-            1) clear; bash <(curl -s "$GITHUB_URL/install/init.sh"); break;;
-            2) clear; bash <(curl -s "$GITHUB_URL/maint/init.sh"); break;;
+            1) bash <(curl -s "$GITHUB_URL/install/init.sh"); break;;
+            2) bash <(curl -s "$GITHUB_URL/maint/init.sh"); break;;
             $((${#items[@]}+1))) break 0;;
             *) echo "Ooops - unknown choice $REPLY"; break;
         esac

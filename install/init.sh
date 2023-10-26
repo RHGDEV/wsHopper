@@ -6,6 +6,7 @@ if ! fn_exists lib_loaded; then
   ! fn_exists lib_loaded && echo "* ERROR: Could not load lib script" && exit 1
 fi
 
+clear # Clear the screen before displaying the script's output
 performupgrades "" # Upgrade prompter
 clear # Clear the screen before displaying the script's output
 
