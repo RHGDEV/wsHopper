@@ -7,6 +7,10 @@ if ! fn_exists lib_loaded; then
 fi
 
 clear # Clear the screen before displaying the script's output
+printbanner ""
+echo ""
+echo "Install Process"
+echo ""
 performupgrades "" # Upgrade prompter
 clear # Clear the screen before displaying the script's output
 
