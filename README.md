@@ -22,12 +22,12 @@ Installation scripts for a linux server.
 
 ## Structure
 
-[./banners/](https://github.com/rhgdev/wshopper/tree/master/banners) - Branch of functions and static files for scripts
+[./banners/](https://github.com/rhgdev/wshopper/tree/master/banners) - Folder of static files for scripts
 
-[./install/](https://github.com/rhgdev/wshopper/tree/master/install) - Install Scripts
+[./install/](https://github.com/rhgdev/wshopper/tree/master/install) - Folder for install scripts
 
-[./lib/](https://github.com/rhgdev/wshopper/tree/master/lib) - Branch of functions and static files for scripts
+[./lib/](https://github.com/rhgdev/wshopper/tree/master/lib) - Lib folder for functions
 
-[./maint/](https://github.com/rhgdev/wshopper/tree/master/maint) - Branch of maintenance scripts
+[./maint/](https://github.com/rhgdev/wshopper/tree/master/maint) - Folder of maintenance scripts
 
 [./init](https://raw.githubusercontent.com/RHGDEV/wsHopper/master/init.sh) - Main menu script
