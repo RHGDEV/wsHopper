@@ -14,7 +14,7 @@ COLOR_NC='\033[0m'
 
 # Functions
 run_script() {
-	bash <(curl -s "$GITHUB_URL/$1/scripts/$1.sh")
+	bash <(curl -s "$GITHUB_URL/$1/scripts/$2.sh")
 }
 
 inject_txt() {
