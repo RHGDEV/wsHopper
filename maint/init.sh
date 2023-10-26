@@ -24,7 +24,7 @@ while true; do
     select item in "${items[@]}" Quit
     do
         case $REPLY in
-            1) clear; bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh"); break;;
+            1) clear; run_script maint accountcreate; break;;
             2) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             3) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             4) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
