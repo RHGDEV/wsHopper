@@ -27,4 +27,5 @@ if askbool "Install and Setup ASP.NET?"; then run_script install aspnet; fi  # I
 
 if askbool "Install and Setup SQL Server?"; then run_script install sql-server; fi  # Install SQL Server
 
-scriptdone "" # Script is done!
+clear # Clear the screen before displaying the script's output
+success "Hopper should be ready to go!" # Display the script is done message

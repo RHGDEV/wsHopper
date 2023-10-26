@@ -1,5 +1,5 @@
 #!/bin/bash
-export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper"
+export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper/master"
 
 # Remove and download new files from github
 rm -rf /tmp/lib.sh
@@ -9,22 +9,28 @@ source /tmp/lib.sh
 clear # Clear the screen before displaying the script's output
 detectssh "" # Detects if SSH is running and displays warning message
 checkforalma9 "" # Checks for AlmaLinux 9 and displays warning message
-welcome "" # Checks for AlmaLinux 9 and displays welcome message
-askformaint "" # For future use maintenance menu (not implemented yet)
 performupgrades "" # Upgrade prompter
 
-if askbool "Install prefab banners?"; then run_script banners; fi # Install banners
+items=(
+	"Install Process"
+	"Maintenance Menu"
+)
 
-if askbool "Configure OpenSSH?"; then run_script openssh; fi  # Install openssh
+while true; do
+	clear
+	printbanner ""
+	echo ""
+	echo ""
+    select item in "${items[@]}" Quit
+    do
+        case $REPLY in
+            1) clear; bash <(curl -s "$GITHUB_URL/install/init.sh"); break;;
+            2) clear; bash <(curl -s "$GITHUB_URL/maint/init.sh"); break;;
+            $((${#items[@]}+1))) break 0;;
+            *) echo "Ooops - unknown choice $REPLY"; break;
+        esac
+    done
+done
 
-if askbool "Install and Setup Fail2ban?"; then run_script fail2ban; fi  # Install fail2ban
-
-if askbool "Install and Setup Apache?"; then run_script apache; fi  # Install Apache
-
-if askbool "Install and Setup MariaDB?"; then run_script mariadb; fi  # Install MariaDB
-
-if askbool "Install and Setup ASP.NET?"; then run_script aspnet; fi  # Install ASP.NET
-
-if askbool "Install and Setup SQL Server?"; then run_script sql-server; fi  # Install SQL Server
-
-scriptdone "" # Script is done!
+rm -rf /tmp/lib.sh # Remove the lib.sh file from /tmp
+clear # Clear the screen before displaying the script's output
