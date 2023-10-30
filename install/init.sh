@@ -7,8 +7,8 @@ if ! fn_exists lib_loaded; then
 fi
 
 items=(
-	"Full Update and Upgrade"
-	"Install banners"
+	"Full System Upgrade"
+	"Install Banners"
 	"Configure OpenSSH"
 	"Install Fail2ban"
 	"Install Apache"
