@@ -24,7 +24,7 @@ while true; do
     select item in "${items[@]}" Quit
     do
         case $REPLY in
-            1) bash <(curl -s "$GITHUB_URL/install/init.sh"); break 0;;
+            1) bash <(curl -s "$GITHUB_URL/install/init.sh"); break;;
             2) bash <(curl -s "$GITHUB_URL/maint/init.sh"); break;;
             $((${#items[@]}+1))) break 0;;
             *) break;
