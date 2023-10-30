@@ -110,14 +110,10 @@ askformaint() {
 
 # Ask if the installer wants to perform a full system upgrade before continuing
 performupgrades() {
-	if askbool "Perform a full upgrade now?"; then
-		info "Performing a full system upgrade. This may take a while..."
-		sudo dnf upgrade -y
-		success "System upgrade complete. Awaiting for any keypress to continue..."
-		read
-	else
-		output "Skipping system upgrade."
-	fi
+	info "Performing a full system upgrade. This may take a while..."
+	sudo dnf upgrade -y
+	success "System upgrade complete. Awaiting for any keypress to continue..."
+	read
 }
 
 # Helper function
