@@ -11,7 +11,7 @@ detectssh "" # Detects if SSH is running and displays warning message
 checkforalma9 "" # Checks for AlmaLinux 9 and displays warning message
 
 items=(
-	"Install Process"
+	"Installation Menu"
 	"Maintenance Menu"
 )
 
