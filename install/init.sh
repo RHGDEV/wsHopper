@@ -6,27 +6,38 @@ if ! fn_exists lib_loaded; then
   ! fn_exists lib_loaded && echo "* ERROR: Could not load lib script" && exit 1
 fi
 
-clear # Clear the screen before displaying the script's output
-printbanner ""
-echo ""
-echo "Install Process"
-echo ""
-performupgrades "" # Upgrade prompter
-clear # Clear the screen before displaying the script's output
+items=(
+	"Full Update and Upgrade"
+	"Install banners"
+	"Configure OpenSSH"
+	"Install Fail2ban"
+	"Install Apache"
+	"Install MariaDB"
+	"Install ASP.NET"
+	"Install SQL Server"
+)
 
-if askbool "Install prefab banners?"; then run_script install banners; fi # Install banners
+while true; do
+	clear
+	printbanner ""
+	echo ""
+	echo "Installation Menu"
+	echo ""
+    select item in "${items[@]}" Quit
+    do
+        case $REPLY in
+			1) clear; performupgrades; break;;
+            2) clear; run_script install banners; break;;
+            3) clear; run_script install openssh; break;;
+            4) clear; run_script install fail2ban; break;;
+            5) clear; run_script install apache; break;;
+            6) clear; run_script install mariadb; break;;
+            7) clear; run_script install aspnet; break;;
+            8) clear; run_script install sql-server; break;;
+            $((${#items[@]}+1))) break 0;;
+            *) break;
+        esac
+    done
+done
 
-if askbool "Configure OpenSSH?"; then run_script install openssh; fi  # Install openssh
-
-if askbool "Install and Setup Fail2ban?"; then run_script install fail2ban; fi  # Install fail2ban
-
-if askbool "Install and Setup Apache?"; then run_script install apache; fi  # Install Apache
-
-if askbool "Install and Setup MariaDB?"; then run_script install mariadb; fi  # Install MariaDB
-
-if askbool "Install and Setup ASP.NET?"; then run_script install aspnet; fi  # Install ASP.NET
-
-if askbool "Install and Setup SQL Server?"; then run_script install sql-server; fi  # Install SQL Server
-
-clear # Clear the screen before displaying the script's output
-success "Hopper should be ready to go!" # Display the script is done message
+clear # clear after user pressed Cancel
