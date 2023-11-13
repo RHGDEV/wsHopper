@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Colors
-COLOR_WHITE='\033[1;1m'
 COLOR_YELLOW='\033[1;33m'
 COLOR_LYELLOW='\033[1;93m'
 COLOR_GREEN='\033[0;32m'
@@ -79,13 +78,7 @@ checkforalma9() {
 	fi
 }
 
-# Fancy welcome message :)
-welcome() {
-	clear
-	#output "Welcome to..."
-	printbanner
-}
-
+# Print a banner that includes the menu name
 printbanner() {
 	echo "       :::    :::  ::::::::  :::::::::  :::::::::  :::::::::: :::::::::"
 	echo "      :+:    :+: :+:    :+: :+:    :+: :+:    :+: :+:        :+:    :+:"
@@ -94,18 +87,9 @@ printbanner() {
 	echo "   +#+    +#+ +#+    +#+ +#+        +#+        +#+        +#+    +#+"
 	echo "  #+#    #+# #+#    #+# #+#        #+#        #+#        #+#    #+#"
 	echo " ###    ###  ########  ###        ###        ########## ###    ###"
-}
-
-askformaint() {
-	if askbool "Would you like to enter the maintenance menu?"; then
-		info "Loading maintenance menu..."
-		bash <(curl -s "$GITHUB_URL/maint/init.sh")
-		clear
-		echo "Maintenance menu exited."
-		exit 0
-	else
-		output "Skipping system upgrade."
-	fi
+	echo ""
+	echo "$1"
+	echo ""
 }
 
 # Ask if the installer wants to perform a full system upgrade before continuing
@@ -116,7 +100,7 @@ performupgrades() {
 	read
 }
 
-# Helper function
+# Helper function to detect if the lib.sh script is loaded
 lib_loaded() {
   return 0
 }
