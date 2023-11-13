@@ -31,4 +31,14 @@ if askbool "Configure apache's UserDir (public_html)"; then
 	chmod 755 ~
 fi
 
+if askbool "Configure homepage redirect?"; then
+	inject_txt /var/www/html/index.html /static/index.html # Simple HTML redirection content
+fi
+
+# if askbool "Configure certbot (SSL)?"; then
+# 	sudo dnf install -y -q certbot python-certbot-apache
+# 	sudo certbot --apache
+# 	sudo certbot renew –dryrun
+# fi
+
 success "Apache Installed!"
