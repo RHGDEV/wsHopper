@@ -19,7 +19,7 @@ items=(
 while true; do
 	clear
 	printbanner "Maintenance Menu"
-    select item in "${items[@]}" Quit
+    select item in "${items[@]}" Back
     do
         case $REPLY in
             1) clear; run_script maint accountcreate; break;;

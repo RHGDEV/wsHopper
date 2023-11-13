@@ -20,7 +20,7 @@ items=(
 while true; do
 	clear
 	printbanner "Installation Menu"
-    select item in "${items[@]}" Quit
+    select item in "${items[@]}" Back
     do
         case $REPLY in
 			1) clear; performupgrades; break;;
