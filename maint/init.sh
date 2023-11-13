@@ -9,30 +9,25 @@ fi
 # TODO: Write maintenance scripts for this
 items=(
 	"Create User"
-	"Delete User"
-	"Change User Password"
-	"Change User Quota"
-	"Change User Sudo Status"
+	#"Delete User"
+	#"Change User Password"
+	#"Change User Quota"
+	#"Change User Sudo Status"
 )
 
 while true; do
 	clear
-	printbanner ""
-	echo ""
-	echo "Maintenance Menu"
-	echo ""
+	printbanner "Maintenance Menu"
     select item in "${items[@]}" Quit
     do
         case $REPLY in
             1) clear; run_script maint accountcreate; break;;
-            2) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
-            3) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
-            4) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
-            5) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
+           # 2) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
+           # 3) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
+            #4) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
+            #5) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             $((${#items[@]}+1))) break 0;;
             *) break;
         esac
     done
 done
-
-clear # clear after user pressed Cancel

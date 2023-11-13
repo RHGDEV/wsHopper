@@ -19,10 +19,7 @@ items=(
 
 while true; do
 	clear
-	printbanner ""
-	echo ""
-	echo "Installation Menu"
-	echo ""
+	printbanner "Installation Menu"
     select item in "${items[@]}" Quit
     do
         case $REPLY in
@@ -39,5 +36,3 @@ while true; do
         esac
     done
 done
-
-clear # clear after user pressed Cancel

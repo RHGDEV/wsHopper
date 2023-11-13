@@ -1,7 +1,7 @@
 #!/bin/bash
 export GITHUB_URL="https://raw.githubusercontent.com/rhgdev/wshopper/master"
 
-# Remove and download new files from github
+# Remove and download new lib file from github
 rm -rf /tmp/lib.sh
 curl -sSL -o /tmp/lib.sh "$GITHUB_URL"/lib/lib.sh
 source /tmp/lib.sh
@@ -17,10 +17,7 @@ items=(
 
 while true; do
 	clear
-	printbanner ""
-	echo ""
-	echo ""
-	echo ""
+	printbanner "Main Menu"
     select item in "${items[@]}" Quit
     do
         case $REPLY in
@@ -33,4 +30,4 @@ while true; do
 done
 
 rm -rf /tmp/lib.sh # Remove the lib.sh file from /tmp
-clear # Clear the screen before displaying the script's output
+clear # Clear the screen before exiting
