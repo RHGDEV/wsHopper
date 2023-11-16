@@ -1,1 +1,6 @@
-TODO: get motd banner from current server
+WSCC Department of Computer Science's Linux Server. Unauthorized use is prohibited.
+
+The usage of this system is governed by the WSCC Acceptable Use Policy.
+Use of this system may be monitored to ensure compliance.
+
+Direct questions about this server to Mark Buckner (mrbuckner@ws.edu).
