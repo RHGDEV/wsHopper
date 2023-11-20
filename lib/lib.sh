@@ -17,7 +17,7 @@ run_script() {
 }
 
 inject_txt() {
-	sudo curl -sSL -o "$1" "$GITHUB_URL/banners/$2"
+	sudo curl -sSL -o "$1" "$GITHUB_URL$2"
 }
 
 # echo functions
@@ -31,6 +31,7 @@ info() {
 
 success() {
   output "${COLOR_GREEN}SUCCESS${COLOR_LGREEN}: $1${COLOR_NC}"
+  read
 }
 
 error() {
@@ -97,7 +98,6 @@ performupgrades() {
 	info "Performing a full system upgrade. This may take a while..."
 	sudo dnf upgrade -y
 	success "System upgrade complete. Awaiting for any keypress to continue..."
-	read
 }
 
 # Helper function to detect if the lib.sh script is loaded
