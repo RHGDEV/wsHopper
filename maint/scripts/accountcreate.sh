@@ -21,6 +21,7 @@ fi
 # Configure Httpd public html directories
 sudo mkdir -p /home/$username/public_html
 sudo chmod 755 /home/$username/
+sudo chown $username:$username /home/$username/public_html
 
 echo "User ${username} has been added to the system!"
 sleep 2
