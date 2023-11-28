@@ -9,7 +9,6 @@ if [ $? -eq 0 ]; then # If user exists
 fi
 echo "" # New line
 read -p "Set quotas for user? [Y/n] " user_quotas # Ask if user should have quotas
-echo username:$username password:$password sudo:$user_sudo quotas:$user_quotas # Debug
 sudo useradd -m -p "$password" "$username" # Create user with password and home directory
 
 # 500Gb soft/hard block limit
@@ -25,4 +24,3 @@ sudo chown $username:$username /home/$username/public_html
 
 echo "User ${username} has been added to the system!"
 sleep 2
-# setquota user blockquota blocklimit inodequota inodelimit /home # Set quota for user
