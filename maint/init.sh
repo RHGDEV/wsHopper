@@ -9,11 +9,13 @@ fi
 # TODO: Write maintenance scripts for this
 items=(
 	"Create User"
+	"Unban IP"
 	#"Delete User"
 	#"Change User Password"
 	#"Change User Quota"
 	#"Change User Sudo Status"
 	"Read secure log"
+	"Read Fail2Ban log"
 )
 
 while true; do
@@ -23,9 +25,9 @@ while true; do
     do
         case $REPLY in
             1) clear; run_script maint accountcreate; break;;
-			2) clear; sudo cat /var/log/secure | less +G; break;;
-            #2) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
-            #3) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
+            2) clear; run_script maint f2bunban; break;;
+			3) clear; sudo cat /var/log/secure | less +G; break;;
+            4) clear; sudo cat /var/log/fail2ban.log | less +G; break;; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             #4) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             #5) echo "not yet";; #bash <(curl -s "$GITHUB_URL/maint/scripts/accountcreate.sh");;
             $((${#items[@]}+1))) break 0;;

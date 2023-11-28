@@ -23,5 +23,5 @@ sudo mkdir -p /home/$username/public_html
 sudo chmod 755 /home/$username/
 
 echo "User ${username} has been added to the system!"
-
+sleep 2
 # setquota user blockquota blocklimit inodequota inodelimit /home # Set quota for user
