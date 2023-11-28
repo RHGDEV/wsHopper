@@ -81,6 +81,7 @@ checkforalma9() {
 
 # Print a banner that includes the menu name
 printbanner() {
+	echo ""
 	echo "       :::    :::  ::::::::  :::::::::  :::::::::  :::::::::: :::::::::"
 	echo "      :+:    :+: :+:    :+: :+:    :+: :+:    :+: :+:        :+:    :+:"
 	echo "     +:+    +:+ +:+    +:+ +:+    +:+ +:+    +:+ +:+        +:+    +:+"
